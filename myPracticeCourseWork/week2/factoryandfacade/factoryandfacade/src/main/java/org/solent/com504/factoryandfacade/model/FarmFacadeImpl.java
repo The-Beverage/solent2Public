@@ -15,21 +15,34 @@ import java.util.List;
 public class FarmFacadeImpl implements FarmFacade{
 
     private List<Animal> animalList = new ArrayList<Animal>();
+    private Animal currAnimal;
     
     public List<Animal> getAllAnimals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Animal a : animalList) {
+            System.out.println("animal '" + a.getName()
+                    + "' makes this sound '" + a.getSound()
+                    + "' because it is a '" + a.getClass().getSimpleName()
+                    + "' implemented by " + a.getClass().getTypeName());
+        }
+        return animalList;
     }
 
     public void addDog(String name) {
-        animalList.add(AnimalObjectFactory.createDog());
+        currAnimal = AnimalObjectFactory.createDog();
+        animalList.add(currAnimal);
+        currAnimal.setName(name);
     }
 
     public void addCat(String name) {
-        animalList.add(AnimalObjectFactory.createCat());
+        currAnimal = AnimalObjectFactory.createCat();
+        animalList.add(currAnimal);
+        currAnimal.setName(name);
     }
 
     public void addCow(String name) {
-        animalList.add(AnimalObjectFactory.createCow());
+        currAnimal = AnimalObjectFactory.createCow();
+        animalList.add(currAnimal);
+        currAnimal.setName(name);
     }
     
 }

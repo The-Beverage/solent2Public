@@ -23,6 +23,15 @@ public class FarmFacadeTest {
         assertNotNull(farmFacade);
         
         // WHAT TESTS WOULD YOU CREATE HERE TO SET UP AND TEST THE FARM FACADE?
+        
+        farmFacade.addCat("Tibbers");
+        farmFacade.addCow("Bessy");
+        farmFacade.addDog("Rex");
+        farmFacade.addDog("Fido");
+        farmFacade.addCow("Daisy");
+        farmFacade.addCat("Dutchess");
+        
+        farmFacade.getAllAnimals();
 
     }
 }

@@ -34,7 +34,17 @@ nb-configuration.xml
 
 # Package Files #
 *.jar
+<<<<<<< HEAD
+/week1/maven-test-exercise/MD/target/
+/myPracticeCourseWork/example1/target/
+/week1/factoryandfacade/factoryandfacade/nbproject/
+/week1/factoryandfacade/factoryandfacade/target/
+/week2/factoryandfacade/factoryandfacade/target/
+/week2/factoryandfacade/factoryandfacade/nbproject/
+/myPracticeCourseWork/week2/factoryandfacade/factoryandfacade/target/
+=======
 *.war
 *.ear
 *.zip
 
+>>>>>>> upstream/master

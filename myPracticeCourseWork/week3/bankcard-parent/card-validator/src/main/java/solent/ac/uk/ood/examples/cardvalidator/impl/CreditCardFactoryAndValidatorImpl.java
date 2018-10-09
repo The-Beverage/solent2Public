@@ -6,6 +6,7 @@
 package solent.ac.uk.ood.examples.cardvalidator.impl;
 
 import solent.ac.uk.ood.examples.cardcheck.CalculateLunnDigit;
+import solent.ac.uk.ood.examples.cardcheck.RegexCardValidator;
 import solent.ac.uk.ood.examples.cardvalidator.model.CardOrganisation;
 import solent.ac.uk.ood.examples.cardvalidator.model.CreditCard;
 import solent.ac.uk.ood.examples.cardvalidator.model.CreditCardFactoryAndValidator;
@@ -64,8 +65,13 @@ public class CreditCardFactoryAndValidatorImpl implements CreditCardFactoryAndVa
 
     @Override
     public CardOrganisation getCardOrganisation(CreditCard card) {
-        //TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        CardOrganisation[] cc = CardOrganisation.values();
+        for(int count = 0; count <= cc.length; count ++){
+            if(cc[count].toString().equals(RegexCardValidator.isValid(card.getCardnumber()).getCardType().getIssuerName())){
+                return cc[count];
+            }
+        }
+        return null;
     }
 
     @Override

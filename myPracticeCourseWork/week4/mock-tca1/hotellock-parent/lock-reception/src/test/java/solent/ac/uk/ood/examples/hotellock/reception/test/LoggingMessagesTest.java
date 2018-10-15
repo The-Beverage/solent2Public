@@ -23,14 +23,15 @@ public class LoggingMessagesTest {
     
     @Test
     public void hello() {
-        LOG.debug("JUST SAYING HELLO DEBUG MESSAGE");
-        LOG.warn("JUST SAYING HELLO WARN MESSAGE");
-        LOG.info("JUST SAYING HELLO INFO MESSAGE");
-        try {
-            throw new RuntimeException("this is a test exception deliberately thrown");
-        } catch (Exception ex) {
-            LOG.error("JUST SAYING HELLO ERROR MESSAGE - the following stack trace is deliberate: ", ex);
-        }
+//        LOG.debug("JUST SAYING HELLO DEBUG MESSAGE");
+//        LOG.warn("JUST SAYING HELLO WARN MESSAGE");
+//        LOG.info("JUST SAYING HELLO INFO MESSAGE");
+//        try {
+//            throw new RuntimeException("this is a test exception deliberately thrown");
+//        } catch (Exception ex) {
+//            LOG.error("JUST SAYING HELLO ERROR MESSAGE - the following stack trace is deliberate: ", ex);
+//        }
+          LOG.debug("HELLO WORLD");
     }
     
     @Test

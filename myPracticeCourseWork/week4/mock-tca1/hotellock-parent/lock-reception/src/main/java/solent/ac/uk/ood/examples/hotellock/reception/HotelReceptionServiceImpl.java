@@ -6,6 +6,8 @@
 package solent.ac.uk.ood.examples.hotellock.reception;
 
 import java.util.Date;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import solent.ac.uk.ood.examples.hotellock.model.CardKey;
 import solent.ac.uk.ood.examples.hotellock.model.HotelReceptionService;
 import solent.ac.uk.ood.examples.hotellock.model.SecretKeyProvider;
@@ -16,11 +18,22 @@ import solent.ac.uk.ood.examples.hotellock.model.SecretKeyProvider;
  */
 public class HotelReceptionServiceImpl implements HotelReceptionService {
 
+    public static final Logger LOG = LogManager.getLogger(HotelReceptionServiceImpl.class);
     private SecretKeyProvider secretKeyProvider;
+    private int issueNumber = 0;
     
     @Override
     public String createCardCode(String roomNumber, Date startDate, Date endDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CardKey card = new CardKey();
+        card.setRoomNumber(roomNumber);
+        card.setStartDate(startDate);
+        card.setEndDate(endDate);
+        card.setIssueNumber(issueNumber);
+        issueNumber += 1;
+        
+        LOG.info("New card issued. IssuNo: " + card.getIssueNumber());
+        
+        return card.toString();
     }
 
     @Override

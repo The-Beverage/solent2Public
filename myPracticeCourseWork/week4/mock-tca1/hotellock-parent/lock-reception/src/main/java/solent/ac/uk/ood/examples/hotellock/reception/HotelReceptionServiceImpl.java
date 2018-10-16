@@ -21,6 +21,7 @@ public class HotelReceptionServiceImpl implements HotelReceptionService {
     public static final Logger LOG = LogManager.getLogger(HotelReceptionServiceImpl.class);
     private SecretKeyProvider secretKeyProvider;
     private int issueNumber = 0;
+    private CardKey cards[];
     
     @Override
     public String createCardCode(String roomNumber, Date startDate, Date endDate) {
@@ -32,13 +33,19 @@ public class HotelReceptionServiceImpl implements HotelReceptionService {
         issueNumber += 1;
         
         LOG.info("New card issued. IssuNo: " + card.getIssueNumber());
+        cards[cards.length] = card;
         
         return card.toString();
     }
 
     @Override
     public CardKey readCard(String cardCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (CardKey card : cards) {
+            if (card.getIssueNumber() == Integer.parseInt(cardCode)) {
+                return card;
+            }
+        }
+        return null;
     }
 
     @Override

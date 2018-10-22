@@ -35,7 +35,7 @@ public class HotelReceptionServiceImpl implements HotelReceptionService {
         LOG.info("New card issued. IssuNo: " + card.getIssueNumber());
         cards[cards.length] = card;
         
-        return card.toString();
+        return secretKeyProvider.encodeCard(card);
     }
 
     @Override

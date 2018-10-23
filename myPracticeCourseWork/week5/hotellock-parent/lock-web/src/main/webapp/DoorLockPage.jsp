@@ -10,16 +10,19 @@
 <%@page import="solent.ac.uk.ood.examples.hotellock.model.SecretKeyProvider"%>
 <%@page import="solent.ac.uk.ood.examples.hotellock.secretkey.SecretKeyProviderImpl"%>
 <%@page import="solent.ac.uk.ood.examples.hotellock.reception.HotelReceptionServiceImpl"%>
+
+<%@page import="solent.ac.uk.ood.examples.hotellock.roomlock.HotelRoomLockServiceImpl" %>
+<%@page import="solent.ac.uk.ood.examples.hotellock.model.HotelRoomLockService" %>
 <!DOCTYPE html>
 <%
-    HotelReceptionService hotelReceptionService = (HotelReceptionService) session.getAttribute("hotelReceptionService");
+    HotelRoomLockService hotelRoomLockService = (HotelRoomLockService) session.getAttribute("hotelReceptionService");
 
     // If the user session has no hotelReceptionService, create a new one
-    if (hotelReceptionService == null) {
-        hotelReceptionService = new HotelReceptionServiceImpl();
+    if (hotelRoomLockService == null) {
+        hotelRoomLockService = new HotelRoomLockServiceImpl();
         SecretKeyProvider secretKeyProvider = new SecretKeyProviderImpl();
-        hotelReceptionService.setSecretKeyProvider(secretKeyProvider);
-        session.setAttribute("hotelReceptionService", hotelReceptionService);
+        hotelRoomLockService.setSecretKeyProvider(secretKeyProvider);
+        session.setAttribute("hotelReceptionService", hotelRoomLockService);
     }
     
     String roomNumber = (String) request.getParameter("roomNumber");
@@ -29,7 +32,8 @@
    
     if("Unlock Door".equals(submitAction)){
         //Code here that executes when the button is pressed
-        if(roomNumber == hotelReceptionService.readCard(pgCardCode).getRoomNumber()){
+        hotelRoomLockService.setRoomNumber(roomNumber);
+        if(hotelRoomLockService.unlockDoor(pgCardCode)){
             output = "Door unlocked";
         }else{
             output = "Door locked";

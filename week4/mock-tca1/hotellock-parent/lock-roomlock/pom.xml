@@ -23,11 +23,21 @@
             <groupId>solent.ac.uk.ood.examples</groupId>
             <artifactId>lock-model</artifactId>
             <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>solent.ac.uk.ood.examples</groupId>
             <artifactId>lock-secretkey</artifactId>
             <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- note test dependency so that we can generate a card -->
+        <dependency>
+            <groupId>solent.ac.uk.ood.examples</groupId>
+            <artifactId>lock-reception</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
         
         <dependency>

@@ -5,6 +5,7 @@
  */
 package solent.ac.uk.ood.examples.hotellock.reception;
 
+import java.util.ArrayList;
 import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +22,7 @@ public class HotelReceptionServiceImpl implements HotelReceptionService {
     public static final Logger LOG = LogManager.getLogger(HotelReceptionServiceImpl.class);
     private SecretKeyProvider secretKeyProvider;
     private int issueNumber = 0;
-    private CardKey cards[];
+    private final ArrayList<CardKey> cards = new ArrayList<>();
     
     @Override
     public String createCardCode(String roomNumber, Date startDate, Date endDate) {
@@ -33,7 +34,7 @@ public class HotelReceptionServiceImpl implements HotelReceptionService {
         issueNumber += 1;
         
         LOG.info("New card issued. IssuNo: " + card.getIssueNumber());
-        cards[cards.length] = card;
+        cards.add(card);
         
         return secretKeyProvider.encodeCard(card);
     }

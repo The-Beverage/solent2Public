@@ -76,6 +76,9 @@ public class CreditCardFactoryAndValidatorImpl implements CreditCardFactoryAndVa
 
     @Override
     public boolean cardNumberLunnIsValid(CreditCard card) {
+<<<<<<< HEAD
+        return RegexCardValidator.isValid(card.getCardnumber()).isValid();
+=======
         if(RegexCardValidator.isValid(card.getCardnumber()).getError() == null){
             return true;
         }else if(RegexCardValidator.isValid(card.getCardnumber()).getError() != null){
@@ -84,6 +87,7 @@ public class CreditCardFactoryAndValidatorImpl implements CreditCardFactoryAndVa
             }
         }
         return false;
+>>>>>>> 97879d755dcf1efe10a8416042921a1a2c258dd2
     }
 
 }

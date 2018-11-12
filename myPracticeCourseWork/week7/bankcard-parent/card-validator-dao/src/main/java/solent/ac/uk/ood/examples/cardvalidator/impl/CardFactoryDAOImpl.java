@@ -23,34 +23,34 @@ public class CardFactoryDAOImpl implements CardFactoryDAO {
     
     public CardFactoryDAOImpl(){
         
-        //TODO you need to use the actual algorythims you created - one for each bank
+        // you need to use the actual algorythims you created - one for each bank
         String iin = SupportedCardIssuerIdentificationNumbers.VISA_NAT_WEST;
         CreditCardFactoryAndValidator ccfv = new CreditCardFactoryAndValidatorImpl();
-        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy());
+        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy().setAlgorythim(iin));
         ccfv.setIssuerIdentificationNumber(iin);
         cardFactoryMap.put(iin, ccfv);
         
         iin=SupportedCardIssuerIdentificationNumbers.VISA_BANK_OF_IRELAND_UK;
         ccfv = new CreditCardFactoryAndValidatorImpl();
-        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy());
+        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy().setAlgorythim(iin));
         ccfv.setIssuerIdentificationNumber(iin);
         cardFactoryMap.put(iin, ccfv);
         
         iin = SupportedCardIssuerIdentificationNumbers.MASTERCARD_TSB_BANK;
         ccfv = new CreditCardFactoryAndValidatorImpl();
-        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy());
+        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy().setAlgorythim(iin));
         ccfv.setIssuerIdentificationNumber(iin);
         cardFactoryMap.put(iin, ccfv);
         
         iin = SupportedCardIssuerIdentificationNumbers.MASTERCARD_LLOYDS_BANK_PLC;
         ccfv = new CreditCardFactoryAndValidatorImpl();
-        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy());
+        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy().setAlgorythim(iin));
         ccfv.setIssuerIdentificationNumber(iin);
         cardFactoryMap.put(iin, ccfv);
         
         iin = SupportedCardIssuerIdentificationNumbers.AMERICAN_EXPRESS_LLOYDS_BANK_PLC;
         ccfv = new CreditCardFactoryAndValidatorImpl();
-        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy());
+        ccfv.setCvvAlgorythim(new TrivialCvvAlgorythimStrategy().setAlgorythim(iin));
         ccfv.setIssuerIdentificationNumber(iin);
         cardFactoryMap.put(iin, ccfv);
         
@@ -72,11 +72,6 @@ public class CardFactoryDAOImpl implements CardFactoryDAO {
     @Override
     public String getIssuerIdentifierNumberForName(String name) {
         return SupportedCardIssuerIdentificationNumbers.ISSUER_IDENTIFICATION_MAP.get(name);
-    }
-
-    @Override
-    public String getNameForIssuerIdentificationNumber(String issuerIdentificationNumber) {
-        return SupportedCardIssuerIdentificationNumbers.ISSUER_NAME_MAP.get(issuerIdentificationNumber);
     }
     
 }

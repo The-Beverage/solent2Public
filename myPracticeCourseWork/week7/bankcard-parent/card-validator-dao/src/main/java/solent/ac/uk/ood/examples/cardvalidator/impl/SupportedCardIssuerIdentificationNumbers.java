@@ -38,16 +38,4 @@ public interface SupportedCardIssuerIdentificationNumbers {
                     put("AMERICAN_EXPRESS_LLOYDS_BANK_PLC", AMERICAN_EXPRESS_LLOYDS_BANK_PLC);
                 }
             });
-    
-        // this creates a constant map. You cannot change a Collections.unmodifiableMap
-    public static final Map<String, String> ISSUER_NAME_MAP
-            = Collections.unmodifiableMap(new HashMap() {
-                {
-                    put(VISA_BANK_OF_IRELAND_UK, "VISA_BANK_OF_IRELAND_UK");
-                    put(VISA_NAT_WEST, "VISA_NAT_WEST");
-                    put(MASTERCARD_TSB_BANK, "MASTERCARD_TSB_BANK");
-                    put(MASTERCARD_LLOYDS_BANK_PLC, "MASTERCARD_LLOYDS_BANK_PLC");
-                    put(AMERICAN_EXPRESS_LLOYDS_BANK_PLC, "AMERICAN_EXPRESS_LLOYDS_BANK_PLC");
-                }
-            });
 }

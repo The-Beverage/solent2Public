@@ -6,8 +6,6 @@
 package solent.ac.uk.ood.examples.cardvalidator.impl;
 
 import solent.ac.uk.ood.examples.cardcheck.CalculateLunnDigit;
-import solent.ac.uk.ood.examples.cardcheck.CardCompany;
-import solent.ac.uk.ood.examples.cardcheck.CardValidationResult;
 import solent.ac.uk.ood.examples.cardcheck.RegexCardValidator;
 import solent.ac.uk.ood.examples.cardvalidator.model.CardOrganisation;
 import solent.ac.uk.ood.examples.cardvalidator.model.CreditCard;
@@ -67,40 +65,25 @@ public class CreditCardFactoryAndValidatorImpl implements CreditCardFactoryAndVa
 
     @Override
     public CardOrganisation getCardOrganisation(CreditCard card) {
-        //TODO THIS IS ANSWER TO EXERCISE
-        CardValidationResult result = RegexCardValidator.isValid(card.getCardnumber());
-        CardCompany type = result.getCardType();
-        switch (type) {
-            case AMEX:
-                // Statements
-                break; // optional
-            case DINERS:
-                return CardOrganisation.DINERS;
-
-            case DISCOVER:
-                return CardOrganisation.DISCOVER;
-
-            case JCB:
-                return CardOrganisation.JCB;
-
-            case MASTERCARD:
-                return CardOrganisation.MASTERCARD;
-
-            case VISA:
-                return CardOrganisation.VISA;
-
-            default:
-                throw new IllegalArgumentException("unknown card type:" + type);
+        CardOrganisation[] cc = CardOrganisation.values();
+        for(int count = 0; count <= cc.length; count ++){
+            if(cc[count].toString().equals(RegexCardValidator.isValid(card.getCardnumber()).getCardType().getIssuerName())){
+                return cc[count];
+            }
         }
-
-        throw new IllegalArgumentException("unknown card type:" + type);
+        return null;
     }
 
     @Override
     public boolean cardNumberLunnIsValid(CreditCard card) {
-        //TODO THIS IS ANSWER TO EXERCISE
-        CardValidationResult result = RegexCardValidator.isValid(card.getCardnumber());
-        return result.isValid();
+        if(RegexCardValidator.isValid(card.getCardnumber()).getError() == null){
+            return true;
+        }else if(RegexCardValidator.isValid(card.getCardnumber()).getError() != null){
+            if(!RegexCardValidator.isValid(card.getCardnumber()).getError().equals("failed luhn check")){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

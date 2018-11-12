@@ -22,32 +22,33 @@ public class CreateAndVerifyNewCreditCardTest {
     public void createAndVerifyCardTest() {
 
         CardFactoryDAO cfdao = new CardFactoryDAOImpl();
+        
+        for(int i = 0; i < 5; i++){
+            String issuerName = cfdao.getSupportedIssuerNames().get(i); // get first issuerName
+            System.out.println("test using issuer:" + issuerName);
 
-        String issuerName = cfdao.getSupportedIssuerNames().get(0); // get first issuerName
-        System.out.println("test using issuer:" + issuerName);
+            String accountNumber = "123456789"; // 9 digits + iin + 1 = 16
 
-        String accountNumber = "123456789"; // 9 digits + iin + 1 = 16
+            String issuerIdentifierNumber = cfdao.getIssuerIdentifierNumberForName(issuerName);
 
-        String issuerIdentifierNumber = cfdao.getIssuerIdentifierNumberForName(issuerName);
+            CreditCardFactoryAndValidator ccFactoryandValidator = cfdao.getCreditCardFactoryAndValidator(issuerIdentifierNumber);
+            String name = "Fred Blogs";
+            String endDate = "0119";
+            String issueNumber = "01";
+            CreditCard newCreditcard = ccFactoryandValidator.createCreditCard(accountNumber, name, endDate, issueNumber);
 
-        CreditCardFactoryAndValidator ccFactoryandValidator = cfdao.getCreditCardFactoryAndValidator(issuerIdentifierNumber);
-        String name = "Fred Blogs";
-        String endDate = "0119";
-        String issueNumber = "01";
-        CreditCard newCreditcard = ccFactoryandValidator.createCreditCard(accountNumber, name, endDate, issueNumber);
+            System.out.println(" new creditcard created:" + newCreditcard);
 
-        System.out.println(" new creditcard created:" + newCreditcard);
+            // decode and verify creditcard
+            String receivedIin = newCreditcard.getIssuerIdentificationNumber();
 
-        // decode and verify creditcard
-        String receivedIin = newCreditcard.getIssuerIdentificationNumber();
+            CreditCardFactoryAndValidator checkValidator = cfdao.getCreditCardFactoryAndValidator(receivedIin);
 
-        CreditCardFactoryAndValidator checkValidator = cfdao.getCreditCardFactoryAndValidator(receivedIin);
+            boolean lunnIsValid = checkValidator.cardNumberLunnIsValid(newCreditcard);
+            boolean cvvIsValid = checkValidator.cvvIsValid(newCreditcard);
 
-        boolean lunnIsValid = checkValidator.cardNumberLunnIsValid(newCreditcard);
-        boolean cvvIsValid = checkValidator.cvvIsValid(newCreditcard);
-
-        assertTrue(lunnIsValid);
-        assertTrue(cvvIsValid);
-
+            assertTrue(lunnIsValid);
+            assertTrue(cvvIsValid);
+        }
     }
 }

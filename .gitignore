@@ -47,4 +47,8 @@ nb-configuration.xml
 *.ear
 *.zip
 
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
+/week8/bankcard-parent/card-web/accounts-data.xml
 >>>>>>> upstream/master

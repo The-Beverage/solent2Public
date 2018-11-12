@@ -6,6 +6,8 @@
 package solent.ac.uk.ood.examples.cardvalidator.impl;
 
 import solent.ac.uk.ood.examples.cardcheck.CalculateLunnDigit;
+import solent.ac.uk.ood.examples.cardcheck.CardCompany;
+import solent.ac.uk.ood.examples.cardcheck.CardValidationResult;
 import solent.ac.uk.ood.examples.cardcheck.RegexCardValidator;
 import solent.ac.uk.ood.examples.cardvalidator.model.CardOrganisation;
 import solent.ac.uk.ood.examples.cardvalidator.model.CreditCard;
@@ -65,18 +67,40 @@ public class CreditCardFactoryAndValidatorImpl implements CreditCardFactoryAndVa
 
     @Override
     public CardOrganisation getCardOrganisation(CreditCard card) {
-        CardOrganisation[] cc = CardOrganisation.values();
-        for(int count = 0; count <= cc.length; count ++){
-            if(cc[count].toString().equals(RegexCardValidator.isValid(card.getCardnumber()).getCardType().getIssuerName())){
-                return cc[count];
-            }
+        //TODO THIS IS ANSWER TO EXERCISE
+        CardValidationResult result = RegexCardValidator.isValid(card.getCardnumber());
+        CardCompany type = result.getCardType();
+        switch (type) {
+            case AMEX:
+                // Statements
+                break; // optional
+            case DINERS:
+                return CardOrganisation.DINERS;
+
+            case DISCOVER:
+                return CardOrganisation.DISCOVER;
+
+            case JCB:
+                return CardOrganisation.JCB;
+
+            case MASTERCARD:
+                return CardOrganisation.MASTERCARD;
+
+            case VISA:
+                return CardOrganisation.VISA;
+
+            default:
+                throw new IllegalArgumentException("unknown card type:" + type);
         }
-        return null;
+
+        throw new IllegalArgumentException("unknown card type:" + type);
     }
 
     @Override
     public boolean cardNumberLunnIsValid(CreditCard card) {
-        return RegexCardValidator.isValid(card.getCardnumber()).isValid();
+        //TODO THIS IS ANSWER TO EXERCISE
+        CardValidationResult result = RegexCardValidator.isValid(card.getCardnumber());
+        return result.isValid();
     }
 
 }

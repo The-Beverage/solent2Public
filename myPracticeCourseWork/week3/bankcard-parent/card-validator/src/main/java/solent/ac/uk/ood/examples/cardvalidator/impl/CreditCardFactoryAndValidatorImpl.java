@@ -76,8 +76,14 @@ public class CreditCardFactoryAndValidatorImpl implements CreditCardFactoryAndVa
 
     @Override
     public boolean cardNumberLunnIsValid(CreditCard card) {
-        //TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(RegexCardValidator.isValid(card.getCardnumber()).getError() == null){
+            return true;
+        }else if(RegexCardValidator.isValid(card.getCardnumber()).getError() != null){
+            if(!RegexCardValidator.isValid(card.getCardnumber()).getError().equals("failed luhn check")){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

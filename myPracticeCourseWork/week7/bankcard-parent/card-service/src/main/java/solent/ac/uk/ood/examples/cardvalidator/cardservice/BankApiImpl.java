@@ -35,47 +35,49 @@ public class BankApiImpl implements BankApi {
 
     @Override
     public Account createAccount(String issuerIdentificationNumber, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account account = accountDAO.createAccount(issuerIdentificationNumber, name);
+        return account;
     }
 
     @Override
     public boolean deleteAccount(String issuerIdentificationNumber, String individualAccountIdentifier) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accountDAO.deleteAccount(issuerIdentificationNumber, individualAccountIdentifier);
     }
 
     @Override
     public Account retrieveAccount(String issuerIdentificationNumber, String individualAccountIdentifier) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accountDAO.retrieveAccount(issuerIdentificationNumber, individualAccountIdentifier);
     }
 
     @Override
     public Account updateAccount(Account account) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account _acount = accountDAO.updateAccount(account);
+        return _acount;
     }
 
     @Override
     public List<Account> getAccountsForIssuer(String issuerIdentificationNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accountDAO.getAccountsForIssuer(issuerIdentificationNumber);
     }
 
     @Override
     public List<String> getSupportedIssuerNames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cardFactoryDao.getSupportedIssuerNames();
     }
 
     @Override
     public String getIssuerIdentifierNumberForName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cardFactoryDao.getIssuerIdentifierNumberForName(name);
     }
 
     @Override
     public String getNameForIssuerIdentificationNumber(String issuerIdentificationNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cardFactoryDao.getNameForIssuerIdentificationNumber(issuerIdentificationNumber);
     }
 
     @Override
     public CreditCard createNewCreditCard(Account account) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cardFactoryDao.getCreditCardFactoryAndValidator(account.getIssuerIdentificationNumber()).createCreditCard(account.getIndividualAccountIdentifier(), account.getName(), "11/19", "1");
     }
 
 }

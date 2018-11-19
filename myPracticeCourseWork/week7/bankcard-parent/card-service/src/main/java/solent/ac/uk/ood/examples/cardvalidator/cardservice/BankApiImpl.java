@@ -5,6 +5,8 @@
  */
 package solent.ac.uk.ood.examples.cardvalidator.cardservice;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,8 @@ public class BankApiImpl implements BankApi {
     private final CardFactoryDAO cardFactoryDao;
 
     private final AccountDAO accountDAO;
+    
+    private int issueNo = 10;
 
     public BankApiImpl(CardFactoryDAO cardFactoryDao, AccountDAO accountDAO) {
         this.cardFactoryDao = cardFactoryDao;
@@ -77,7 +81,12 @@ public class BankApiImpl implements BankApi {
 
     @Override
     public CreditCard createNewCreditCard(Account account) {
-        return cardFactoryDao.getCreditCardFactoryAndValidator(account.getIssuerIdentificationNumber()).createCreditCard(account.getIndividualAccountIdentifier(), account.getName(), "11/19", "1");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, 6);
+        String month = String.valueOf(c.get(Calendar.MONTH));
+        String year = String.valueOf(c.get(Calendar.YEAR)).substring(2);
+        String expirationDate = month + "/" + year;
+        return cardFactoryDao.getCreditCardFactoryAndValidator(account.getIssuerIdentificationNumber()).createCreditCard(account.getIndividualAccountIdentifier(), account.getName(),expirationDate , String.valueOf(issueNo));
     }
 
 }

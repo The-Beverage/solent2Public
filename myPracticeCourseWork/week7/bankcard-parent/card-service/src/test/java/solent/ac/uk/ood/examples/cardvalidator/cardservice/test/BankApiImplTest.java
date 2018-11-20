@@ -30,7 +30,7 @@ public class BankApiImplTest {
         
         //System.out.println(bank.createAccount("428586", "First Account"));
         System.out.println(bank.getAccountsForIssuer("428586"));
-        System.out.println(bank.deleteAccount("428586", "00000007"));
+        //System.out.println(bank.deleteAccount("428586", "00000007"));
         
         Account acc = bank.retrieveAccount("428586", "00000004");
         System.out.println(bank.createNewCreditCard(acc));

@@ -85,7 +85,7 @@ public class BankApiImpl implements BankApi {
         c.add(Calendar.MONTH, 6);
         String month = String.valueOf(c.get(Calendar.MONTH));
         String year = String.valueOf(c.get(Calendar.YEAR)).substring(2);
-        String expirationDate = month + "/" + year;
+        String expirationDate = month + year;
         return cardFactoryDao.getCreditCardFactoryAndValidator(account.getIssuerIdentificationNumber()).createCreditCard(account.getIndividualAccountIdentifier(), account.getName(),expirationDate , String.valueOf(issueNo));
     }
 
